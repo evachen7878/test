@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>task18-JS</title>
+	<style type="text/css">
+	.exibit{
+	width:50px;height:50px; 
+	float:left; 
+	background-color: red;   
+	text-align: center;        
+	line-height: 50px;        
+	overflow:hidden;
+	margin-right: 5px;
+	}
+	</style>
+</head>
+<body>
+	<div> <INPUT type="text"/> </div>
+	<div>
+		<input type="button" value="左侧进">
+		<input type="button" value="右侧进">
+		<input type="button" value="左侧出">
+		<input type="button" value="右侧出">
+	</div>
+
+	<div id="line"> 
+		<div class="exibit" id="one">oh!</div>
+	 
+	</div>
+
+
+	<script type="text/javascript">
+	
+	var ip=document.getElementsByTagName("INPUT");
+	var cub=document.getElementById("line");
+
+	ip[1].addEventListener("click",function(){
+		var num=ip[0].value;
+		// if(!/\d/.test(num)){
+			if(/[^0-9]+/.test(num)){
+
+			alert("请输入数字！");
+			ip[0].value='';
+
+		}
+		else{
+		var cubs = document.createElement("div");
+		cubs.className="exibit"; 
+		// cubs.setAttribute("onclick","removecub(this,'line')");
+	    cubs.innerHTML=ip[0].value;
+	    ip[0].value='';
+
+	    //if(cub.childNodes){
+	      cub.insertBefore(cubs,cub.firstChild);
+	      cubs.addEventListener("click",function(){
+	        cub.removeChild(cubs);
+	      },false);}
+	      //点击之后要实现消除文本框里面的输入
+	    //}
+	},false);
+
+	ip[2].addEventListener("click",function(){
+		var num=ip[0].value;
+		if(/[^0-9]+/.test(num)){
+
+			alert("请输入数字！");
+			ip[0].value='';
+
+		}
+		else{
+		var cubs = document.createElement("div");
+		cubs.className="exibit"; 
+	    cubs.innerHTML=ip[0].value;
+	    ip[0].value='';
+	      cub.insertBefore(cubs,cub.lastChild);
+	      cubs.addEventListener("click",function(){
+	        cub.removeChild(cubs);
+	      },false);}
+	   
+	},false);
+
+	ip[3].addEventListener("click",function(){
+		var cubs= cub.firstChild;
+	    cub.removeChild(cubs); 
+	    alert(cubs.innerText);     	   
+	},false);
+
+	ip[4].addEventListener("click",function(){
+		var cubs= cub.lastChild;
+		if(cubs.length>1){
+	    cub.removeChild(cubs.previousSibling); 
+	    alert(cubs.innerText);  
+	    }     	   
+	},false);
+
+	</script>
+
+	<!--script type="text/javascript">
+	var ip=document.getElementsByTagName("INPUT");
+	var EventUtil;
+	EventUtil.addHandler(ip[0],"keypress",function(event){
+		event=EventUtil.getEvent(event);
+		var charCode=EventUtil.getCharCode(event);
+		if(!/\d/.test(String.fromCharCode(charCode))){
+			EventUtil.preventDefault(event);
+		}
+
+	});
+
+	</script-->
+
+
+
+</body>
+</html>
